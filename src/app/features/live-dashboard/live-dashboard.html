@@ -1,0 +1,62 @@
+<!--<div class="card p-4">-->
+<!--  <h4>Live Price Dashboard</h4>-->
+<!--  <p>Charts and order placement will go here.</p>-->
+<!--</div>-->
+
+<div class="row">
+
+  <!-- Charts Section -->
+  <div class="col-md-8">
+
+    <div class="row">
+      <div class="col-md-6 mb-4" *ngFor="let stock of stocks">
+        <div class="card p-2">
+          <h6>{{stock}} Price Chart</h6>
+          <canvas [id]="stock"></canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Order Form -->
+  <div class="col-md-4">
+
+    <div class="card p-3">
+
+      <h5>Place Order</h5>
+
+      <div class="mb-3">
+        <label>Stock</label>
+        <select class="form-control" [(ngModel)]="selectedStock">
+          <option *ngFor="let s of stocks" [value]="s">
+            {{s}}
+          </option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label>Order Type</label>
+        <select class="form-control" [(ngModel)]="orderType">
+          <option value="BUY">BUY</option>
+          <option value="SELL">SELL</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label>Price</label>
+        <input type="number"
+               class="form-control"
+               [(ngModel)]="price">
+      </div>
+
+      <button class="btn btn-primary w-100"
+              (click)="submitOrder()">
+        Submit
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
