@@ -3,60 +3,127 @@
 <!--  <p>Charts and order placement will go here.</p>-->
 <!--</div>-->
 
-<div class="row">
+<!--<div class="row">-->
 
-  <!-- Charts Section -->
-  <div class="col-md-8">
+<!--  &lt;!&ndash; Charts Section &ndash;&gt;-->
+<!--  <div class="col-md-8">-->
 
-    <div class="row">
-      <div class="col-md-6 mb-4" *ngFor="let stock of stocks">
-        <div class="card p-2">
-          <h6>{{stock}} Price Chart</h6>
-          <canvas [id]="stock"></canvas>
-        </div>
+<!--    <div class="row">-->
+<!--      <div class="col-md-6 mb-4" *ngFor="let stock of stocks">-->
+<!--        <div class="card p-2">-->
+<!--          <h6>{{stock}} Price Chart</h6>-->
+<!--          <canvas [id]="stock"></canvas>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </div>-->
+
+<!--  &lt;!&ndash; Order Form &ndash;&gt;-->
+<!--  <div class="col-md-4">-->
+
+<!--    <div class="card p-3">-->
+
+<!--      <h5>Place Order</h5>-->
+
+<!--      <div class="mb-3">-->
+<!--        <label>Stock</label>-->
+<!--        <select class="form-control" [(ngModel)]="selectedStock">-->
+<!--          <option *ngFor="let s of stocks" [value]="s">-->
+<!--            {{s}}-->
+<!--          </option>-->
+<!--        </select>-->
+<!--      </div>-->
+
+<!--      <div class="mb-3">-->
+<!--        <label>Order Type</label>-->
+<!--        <select class="form-control" [(ngModel)]="orderType">-->
+<!--          <option value="BUY">BUY</option>-->
+<!--          <option value="SELL">SELL</option>-->
+<!--        </select>-->
+<!--      </div>-->
+
+<!--      <div class="mb-3">-->
+<!--        <label>Price</label>-->
+<!--        <input type="number"-->
+<!--               class="form-control"-->
+<!--               [(ngModel)]="price">-->
+<!--      </div>-->
+
+<!--      <button class="btn btn-primary w-100"-->
+<!--              (click)="submitOrder()">-->
+<!--        Submit-->
+<!--      </button>-->
+
+<!--    </div>-->
+
+<!--  </div>-->
+
+<!--</div>-->
+
+<div class="container">
+
+  <!-- LEFT : Live Prices -->
+  <div class="prices">
+    <div class="card" *ngFor="let s of ['AA','BB','CC','DD']">
+      <h3>Stock {{ s }}</h3>
+      <h1>{{ prices[s] | number:'1.2-2' }}</h1>
+    </div>
+  </div>
+
+  <!-- RIGHT : Order Form -->
+<!--  <div class="order-box">-->
+<!--    <h3>Place Order</h3>-->
+
+<!--    <select [(ngModel)]="order.stock">-->
+<!--      <option>AA</option>-->
+<!--      <option>BB</option>-->
+<!--      <option>CC</option>-->
+<!--      <option>DD</option>-->
+<!--    </select>-->
+
+<!--    <select [(ngModel)]="order.type">-->
+<!--      <option>BUY</option>-->
+<!--      <option>SELL</option>-->
+<!--    </select>-->
+
+<!--    <input-->
+<!--      type="number"-->
+<!--      [(ngModel)]="order.price"-->
+<!--      placeholder="Price"-->
+<!--    />-->
+
+<!--    <button (click)="submitOrder()">Submit</button>-->
+
+<!--    <p class="ack">{{ message }}</p>-->
+<!--  </div>-->
+
+<!--</div>-->
+
+
+  <div class="dashboard">
+    <div class="chart-grid">
+      <div class="chart-card" *ngFor="let s of ['AA','BB','CC','DD']">
+        <h3>{{ s }}</h3>
+        <canvas [id]="s + '-chart'"></canvas>
       </div>
     </div>
 
-  </div>
+    <!-- Order Panel -->
+    <div class="order-panel">
+      <select [(ngModel)]="selectedStock">
+        <option *ngFor="let s of ['AA','BB','CC','DD']" [value]="s">
+          {{ s }}
+        </option>
+      </select>
 
-  <!-- Order Form -->
-  <div class="col-md-4">
+      <select [(ngModel)]="orderType">
+        <option value="BUY">Buy</option>
+        <option value="SELL">Sell</option>
+      </select>
 
-    <div class="card p-3">
+      <input type="number" placeholder="Price" [(ngModel)]="orderPrice" />
 
-      <h5>Place Order</h5>
-
-      <div class="mb-3">
-        <label>Stock</label>
-        <select class="form-control" [(ngModel)]="selectedStock">
-          <option *ngFor="let s of stocks" [value]="s">
-            {{s}}
-          </option>
-        </select>
-      </div>
-
-      <div class="mb-3">
-        <label>Order Type</label>
-        <select class="form-control" [(ngModel)]="orderType">
-          <option value="BUY">BUY</option>
-          <option value="SELL">SELL</option>
-        </select>
-      </div>
-
-      <div class="mb-3">
-        <label>Price</label>
-        <input type="number"
-               class="form-control"
-               [(ngModel)]="price">
-      </div>
-
-      <button class="btn btn-primary w-100"
-              (click)="submitOrder()">
-        Submit
-      </button>
-
+      <button (click)="submitOrder()">Submit</button>
     </div>
-
   </div>
-
-</div>
